@@ -1,5 +1,5 @@
 import Assets from '../../assets';
-import {ScaleManager, State, Text} from 'phaser-shim';
+import {Physics, ScaleManager, State, Text} from 'phaser-shim';
 import States from '../names';
 
 export default class Loading extends State {
@@ -15,6 +15,7 @@ export default class Loading extends State {
 
     create(): void {
         this.game.stage.backgroundColor = '#fff';
+        this.game.physics.startSystem(Physics.ARCADE);
 
         // Resizing logic
         this.game.scale.scaleMode = ScaleManager.SHOW_ALL;
@@ -24,6 +25,9 @@ export default class Loading extends State {
                 window.innerHeight * window.devicePixelRatio);
         });
 
+        this.game.state.start(States.TITLE);
+
+        /*
         this.text = this.game.add.text(0, 0, window.document.title = '0% loaded...', {
             boundsAlignH: 'center',
             boundsAlignV: 'middle',
@@ -38,5 +42,6 @@ export default class Loading extends State {
                 this.game.state.start(States.TITLE);
             }
         }, 1);
+        */
     }
 }
